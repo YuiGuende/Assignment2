@@ -1,6 +1,10 @@
 package Book;
+
+import model.Node;
+
 public class InOrderTraverse {
-public void inOrderTraverse() {
+    
+public void inOrderTraverse(Node root) {
     inOrderRec(root);
 }
 

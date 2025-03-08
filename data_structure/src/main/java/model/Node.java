@@ -10,17 +10,18 @@ package model;
  */
 public class Node<T extends Comparable<T>> {
 
-    private T data;
+        
+    public T data;
     private int height;
-    private Node<T> leftChild;
-    private Node<T> rightChild;
+    public Node<T> left;
+    public Node<T> right;
 
 
     public Node(T data) {
         this.data = data;
         this.height = 1;
-        this.leftChild = null;
-        this.rightChild = null;
+        this.left = null;
+        this.right = null;
     }
 
     public T getData() {
@@ -39,20 +40,20 @@ public class Node<T extends Comparable<T>> {
         this.height = height;
     }
 
-    public Node<T> getLeftChild() {
-        return leftChild;
+    public Node<T> getLeft() {
+        return left;
     }
 
-    public void setLeftChild(Node<T> leftChild) {
-        this.leftChild = leftChild;
+    public void setLeft(Node<T> left) {
+        this.left = left;
     }
 
-    public Node<T> getRightChild() {
-        return rightChild;
+    public Node<T> getRight() {
+        return right;
     }
 
-    public void setRightChild(Node<T> rightChild) {
-        this.rightChild = rightChild;
+    public void setRight(Node<T> right) {
+        this.right = right;
     }
 
 }

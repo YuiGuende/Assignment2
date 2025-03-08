@@ -1,6 +1,11 @@
 package Book;
+
+import model.Node;
+
 public class Insert {
+    
 public void insert(Book book) {
+    Node root = null;
     root = insertRec(root, book);
 }
 

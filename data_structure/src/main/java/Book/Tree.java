@@ -4,6 +4,8 @@
  */
 package Book;
 
+import model.Node;
+
 /**
  *
  * @author LEGION
@@ -26,9 +28,9 @@ public class Tree<T extends Comparable<T>> {
             return new Node<>(data);
         }
         if (data.compareTo(node.getData()) < 0) {
-            node.setLeftChild(insert(data, node.getLeftChild()));
+            node.setLeft(insert(data, node.getLeft()));
         } else if (data.compareTo(node.getData()) > 0) {
-            node.setRightChild(insert(data, node.getRightChild()));
+            node.setRight(insert(data, node.getRight()));
         } else {
             return node;
         }
@@ -45,9 +47,9 @@ public class Tree<T extends Comparable<T>> {
             return false;
         }
         if (data.compareTo(node.getData()) < 0) {
-            return search(node.getLeftChild(), data);
+            return search(node.getLeft(), data);
         } else if (data.compareTo(node.getData()) > 0) {
-            return search(node.getRightChild(), data);
+            return search(node.getRight(), data);
         } else {
             return true;
         }
@@ -62,34 +64,34 @@ public class Tree<T extends Comparable<T>> {
             return null;
         }
         if (data.compareTo(node.getData()) < 0) {
-            node.setLeftChild(delete(node.getLeftChild(), data));
+            node.setLeft(delete(node.getLeft(), data));
         } else if (data.compareTo(node.getData()) > 0) {
-            node.setRightChild(delete(node.getRightChild(), data));
+            node.setRight(delete(node.getRight(), data));
         } else {
-            if (node.getLeftChild() == null) {
-                return node.getRightChild();
-            } else if (node.getRightChild() == null) {
-                return node.getLeftChild();
+            if (node.getLeft() == null) {
+                return node.getRight();
+            } else if (node.getRight() == null) {
+                return node.getLeft();
             }
-            Node<T> temp = findMin(node.getRightChild());
+            Node<T> temp = findMin(node.getRight());
             node.setData(temp.getData());
-            node.setRightChild(delete(node.getRightChild(), temp.getData()));
+            node.setRight(delete(node.getRight(), temp.getData()));
         }
         updateHeight(node);
         return applyRotation(node);
     }
 
     private Node<T> findMin(Node<T> node) {
-        while (node.getLeftChild() != null) {
-            node = node.getLeftChild();
+        while (node.getLeft() != null) {
+            node = node.getLeft();
         }
         return node;
     }
 
     private void updateHeight(Node<T> node) {
         int height = Math.max(
-                height(node.getLeftChild()),
-                height(node.getRightChild())
+                height(node.getLeft()),
+                height(node.getRight())
         );
         node.setHeight(height + 1);
     }
@@ -102,14 +104,14 @@ public class Tree<T extends Comparable<T>> {
         int balance = balance(node);
 
         if (balance > 1) {//left heavy
-            if (balance(node.getLeftChild()) < 0) {
-                node.setLeftChild(rotateLeft(node.getLeftChild()));
+            if (balance(node.getLeft()) < 0) {
+                node.setLeft(rotateLeft(node.getLeft()));
             }
             return rotateRight(node);
         }
         if (balance < -1) {// right heavy
-            if (balance(node.getRightChild()) > 0) {
-                node.setRightChild(rotateRight(node.getRightChild()));
+            if (balance(node.getRight()) > 0) {
+                node.setRight(rotateRight(node.getRight()));
             }
             return rotateLeft(node);
         }
@@ -118,14 +120,14 @@ public class Tree<T extends Comparable<T>> {
     }
 
     private int balance(Node<T> node) {
-        return node != null ? height(node.getLeftChild()) - height(node.getRightChild()) : 0;
+        return node != null ? height(node.getLeft()) - height(node.getRight()) : 0;
     }
 
     private Node<T> rotateLeft(Node<T> node) {
-        Node<T> rightNode = node.getRightChild();
-        Node<T> centerNode = rightNode.getLeftChild();
-        rightNode.setLeftChild(node);
-        node.setRightChild(centerNode);
+        Node<T> rightNode = node.getRight();
+        Node<T> centerNode = rightNode.getLeft();
+        rightNode.setLeft(node);
+        node.setRight(centerNode);
         updateHeight(node);
         updateHeight(rightNode);
         return rightNode;
@@ -133,10 +135,10 @@ public class Tree<T extends Comparable<T>> {
     }
 
     private Node<T> rotateRight(Node<T> node) {
-        Node<T> leftNode = node.getLeftChild();
-        Node<T> centerNode = leftNode.getRightChild();
-        leftNode.setRightChild(node);
-        node.setLeftChild(centerNode);
+        Node<T> leftNode = node.getLeft();
+        Node<T> centerNode = leftNode.getRight();
+        leftNode.setRight(node);
+        node.setLeft(centerNode);
         updateHeight(node);
         updateHeight(leftNode);
         return leftNode;
@@ -150,9 +152,9 @@ public class Tree<T extends Comparable<T>> {
         if (node == null) {
             return;
         }
-        inOrderTraversalHelper(node.getLeftChild());
+        inOrderTraversalHelper(node.getLeft());
         visit(node);
-        inOrderTraversalHelper(node.getRightChild());
+        inOrderTraversalHelper(node.getRight());
     }
 
     private void visit(Node<T> node) {

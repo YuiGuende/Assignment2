@@ -1,6 +1,6 @@
 package Book;
 public class Book {
-    private String bcode;
+    String bcode;
     private String title;
     private int quantity;
     private int lended;

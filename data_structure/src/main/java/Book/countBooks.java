@@ -1,5 +1,9 @@
 package Book;
+
+import model.Node;
+
 public class countBooks {
+    Node root;
 public int countBooks() {
     return countRec(root);
 }

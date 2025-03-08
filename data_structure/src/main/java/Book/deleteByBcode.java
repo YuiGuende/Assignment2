@@ -1,6 +1,10 @@
 package Book;
-public deleteByCode {
-public void deleteByBcode(String bcode) {
+
+import model.Node;
+
+public class deleteByCode {
+    Node root;
+public void deleteBycode(String bcode) {
     root = deleteRec(root, bcode);
 }
 
