@@ -1,4 +1,4 @@
-package assignment2;
+package Book;
 public class Book {
     private String bcode;
     private String title;

@@ -1,4 +1,4 @@
-package assignment2;
+package model;
 public class Lending {
     private String bcode;  
     private String rcode;  

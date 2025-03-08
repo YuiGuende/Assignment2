@@ -1,4 +1,4 @@
-package assignment2;
+package model;
 public class Reader {
     private String rcode; 
     private String name;

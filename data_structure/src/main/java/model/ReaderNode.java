@@ -1,4 +1,4 @@
-package assignment2;
+package model;
 public class ReaderNode {
     Reader data;
     ReaderNode next;
